@@ -1,0 +1,29 @@
+mixin icon(name,mod)
+	- mod = mod || ''
+	svg(class="icon icon-" + name + ' ' + mod)
+		use(xlink:href="img/svg/symbol/sprite.svg#" + name)
+
+
+//  Breadcrumbs
+//  items - pages in array, e.g. (['Main page', 'News'])
+//  last - last active page in span, e.g. (['Main page', 'News'], 'News detail')
+mixin breadcrumbs(items, last, title)
+	section.breadcrumbs.breadcrumbs--404
+		.breadcrumbs-title
+			h2.breadcrumbs--title= title
+		.breadcrumbs-nav
+			ul
+				each item in items
+					li
+						if (items.length === 1)
+							p= item
+						else
+							a(href="#")= item
+
+				if last
+					li
+						p= last
+				else
+
+//+breadcrumbs(['Main page', 'News'], 'News detail')
+//+breadcrumbs(['Main page'])

@@ -1,0 +1,70 @@
+
+<!--  Breadcrumbs-->
+<!--  items - pages in array, e.g. (['Main page', 'News'])-->
+<!--  last - last active page in span, e.g. (['Main page', 'News'], 'News detail')-->
+<!--+breadcrumbs(['Main page', 'News'], 'News detail')-->
+<!--+breadcrumbs(['Main page'])--><!DOCTYPE html>
+<html lang="ru-RU">
+  <head>
+    <meta charset="utf-8">
+    <title>Главная страница</title>
+    <meta http-equiv="X-UA-Compatible" content="IE = edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <h1 class="header--h1">Твой персональный затвердитель</h1>
+      </div>
+      <main class="start-block">
+        <div class="forms">
+          <div class="forms-item">
+            <label for="name">Как тебя зовут приятель?</label>
+            <input class="input js-name" type="text" id="name">
+          </div>
+          <div class="forms-item">
+            <label for="goal">Какова твоя цель?</label>
+            <input class="input js-input-goal" type="text" id="goal">
+          </div>
+          <div class="forms-item">
+            <p>Когда начнем?</p>
+            <button class="js-button-today">Сегодня</button>
+            <button class="js-button-tomorrow">Завтра</button>
+            <button class="js-button-after-tomorrow">Послезавтра</button>
+            <button class="js-button-in-monday">В понедельник</button>
+          </div>
+        </div>
+        <div class="goal-block">
+          <h2 class="goal-block--h2">Моя цель: <span class="js-text-goal"></span></h2>
+          <ul class="goal-items"></ul>
+        </div>
+        <div class="meet-block">
+          <p>Привет <span class="js-yourname"></span>! Я твой персональный затвердитель. У нас простые правила:</p>
+          <ul>
+            <li>1. Поставь цель</li>
+            <li>2. Выбери дату когда хочешь начать</li>
+            <li>3. Отмечай каждый день, когда достиг своей цели</li>
+            <li>4. Продержаться 21 день!</li>
+          </ul>
+          <p>Это все!</p>
+          <p>Если ты не отметишься один день, то мы прощаемся с тобой и стираем тебя с глаз долой.</p>
+        </div>
+        <div class="information-block">
+          <p>В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. </p>
+        </div>
+      </main>
+    </div>
+    <!-- loadCss-->
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- loadScript-->
+    <script src="js/all.js"></script>
+    <script src="js/common.js"></script>
+  </body>
+</html>
