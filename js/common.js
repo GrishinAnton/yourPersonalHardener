@@ -99,11 +99,20 @@ var afterTomorrowDay = $('.js-button-after-tomorrow')
 var inMondayDay = $('.js-button-in-monday')
 
 
+if(localStorage.getItem('name')){
+	inputName.val(localStorage.getItem('name'))
+	$(textName).text(localStorage.getItem('name'))
+}
 inputName.on('input', function(){
 	$(textName).text($(this).val())
 	localStorage.setItem('name', $(this).val())
 })
 
+
+if(localStorage.getItem('goal')){
+	inputGoal.val(localStorage.getItem('goal'))
+	$(textGoal).text(localStorage.getItem('goal'))
+}
 inputGoal.on('input', function(){
 	$(textGoal).text($(this).val())
 	localStorage.setItem('goal', $(this).val())
@@ -116,7 +125,7 @@ todayDay.on('click', function(){
 	for(var i = 0; i < 21; i++){
 		var number = date + (1000 * 60 * 60 * hour)
 		var currentDate = new Date(number)
-		goalItems.append('<li>' + currentDate.getDate()  + '</li>')
+		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
 		hour+=24
 	}
 })
@@ -129,7 +138,7 @@ tomorrowDay.on('click', function(){
 	for(var i = 0; i < 21; i++){
 		var number = date + (1000 * 60 * 60 * hour)
 		var currentDate = new Date(number)
-		goalItems.append('<li>' + currentDate.getDate()  + '</li>')
+		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
 		hour+=24
 	}
 })
@@ -141,18 +150,64 @@ afterTomorrowDay.on('click', function(){
 	for(var i = 0; i < 21; i++){
 		var number = date + (1000 * 60 * 60 * hour)
 		var currentDate = new Date(number)
-		goalItems.append('<li>' + currentDate.getDate()  + '</li>')
+		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
 		hour+=24
 	}
 })
 
+inMondayDay.on('click', function(){
+	goalItems.html('')
+	var date = new Date
+	var daynow = date.getDay()
+	var hour = 0; 
+	
+	switch(daynow){
+		case 1: 
+			hour = 168
+			break
+	}
+
+	for(var i = 0; i < 21; i++){
+		var number = Date.parse(date) + (1000 * 60 * 60 * hour)
+		var currentDate = new Date(number)
+		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
+		hour+=24
+	}
+})
+
+//обработчик на родителя с дилигированием
+goalItems.on('click', function(e){
+	$(e.target).closest('.goal-item').find('input').prop('disabled', false)
+
+	if($(e.target).closest('.goal-item').find('input').prop('checked')){
+		$(e.target).closest('.goal-item').addClass('active')
+	}else{
+		$(e.target).closest('.goal-item').removeClass('active')
+	}
+})
 
 
-/*
-1. Нам нужно определить день
-2. Создать 21 разметку
-  кол-во дней в месяце миинус начальная дата
-	2.1 Если с начальной даты до конца месяца меньше дней,
-	 то остаток надо взять в следующем месяце получается
-3. Заполнить датами начиная с выбранного дня
-*/
+//шаблон вывода дат
+function teamplateDate(date, month){
+	var teamplate = `
+		<div class="goal-item">
+			<label>${date} <span>${month}</span>
+				<input type="checkbox" disabled>
+			</label>
+		</div>`
+	goalItems.append(teamplate)
+}
+
+//определение месяца по номерц
+function getMonth(numberMonth){
+	switch(numberMonth){
+		case 0:
+			return 'Января'
+		case 1:
+			return 'Февраля'
+		case 2:
+			return 'Марта'
+	}
+}
+
+//localStorge

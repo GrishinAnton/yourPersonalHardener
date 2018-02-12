@@ -1,9 +1,4 @@
-
-<!--  Breadcrumbs-->
-<!--  items - pages in array, e.g. (['Main page', 'News'])-->
-<!--  last - last active page in span, e.g. (['Main page', 'News'], 'News detail')-->
-<!--+breadcrumbs(['Main page', 'News'], 'News detail')-->
-<!--+breadcrumbs(['Main page'])--><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru-RU">
   <head>
     <meta charset="utf-8">
@@ -16,6 +11,7 @@
     <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   </head>
   <body>
     <div class="wrapper">
@@ -25,12 +21,12 @@
       <main class="start-block">
         <div class="forms">
           <div class="forms-item">
-            <label for="name">Как тебя зовут приятель?</label>
-            <input class="input js-name" type="text" id="name">
+            <label class="forms-item__label" for="name">Хочешь представиться?</label>
+            <input class="forms-item__input js-name" type="text" id="name">
           </div>
           <div class="forms-item">
-            <label for="goal">Какова твоя цель?</label>
-            <input class="input js-input-goal" type="text" id="goal">
+            <label class="forms-item__label" for="goal">Какова твоя цель?</label>
+            <input class="forms-item__input js-input-goal" type="text" id="goal">
           </div>
           <div class="forms-item">
             <p>Когда начнем?</p>
@@ -42,7 +38,7 @@
         </div>
         <div class="goal-block">
           <h2 class="goal-block--h2">Моя цель: <span class="js-text-goal"></span></h2>
-          <ul class="goal-items"></ul>
+          <div class="goal-items"></div>
         </div>
         <div class="meet-block">
           <p>Привет <span class="js-yourname"></span>! Я твой персональный затвердитель. У нас простые правила:</p>

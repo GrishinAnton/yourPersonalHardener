@@ -10,11 +10,11 @@ block content
 		main.start-block
 			.forms
 				.forms-item
-					label(for="name") Как тебя зовут приятель?
-					input(type="text" id="name" class="input js-name" )
+					label(for="name").forms-item__label Хочешь представиться?
+					input(type="text" id="name" class="forms-item__input js-name")
 				.forms-item
-					label(for="goal") Какова твоя цель?
-					input(type="text" id="goal" class="input js-input-goal" )
+					label(for="goal").forms-item__label Какова твоя цель?
+					input(type="text" id="goal" class="forms-item__input js-input-goal")
 				.forms-item
 					p Когда начнем?
 					button.js-button-today Сегодня
@@ -23,7 +23,10 @@ block content
 					button.js-button-in-monday В понедельник
 			.goal-block
 				h2.goal-block--h2 Моя цель: <span class="js-text-goal"></span>
-				ul.goal-items
+				.goal-items
+					//- .goal-item
+					//- 	label 10 <span>февраля</span>
+					//- 		input(type="checkbox")
 			.meet-block
 				p Привет <span class="js-yourname"></span>! Я твой персональный затвердитель. У нас простые правила:
 				ul
