@@ -8,6 +8,11 @@ body
 	margin: 0
 	padding: 0
 
+html 
+	margin-left: calc(100vw - 100%)
+
+
+
 =roboto
 	font-family: "Roboto", sans-serif
 
@@ -26,45 +31,50 @@ a:focus
 	text-decoration: none
 
 .wrapper
+	max-width: 1170px
+	margin: 0 auto
 	padding: 15px
 
 
+.header
+	text-align: center
+	margin-bottom: 30px
+
+
+.forms
 
 
 .forms-item
 	margin-bottom: 20px
+	position: relative
+
+
+
+
+
+
+
+
 .forms-item__label
 	display: block
+	font-weight: 700
 
 .forms-item__input
 	height: 20px
 	padding-left: 10px
 	+roboto
 
+.forms-button
+	margin-bottom: 20px
+	p
+		font-weight: 700
+
+
 
 
 .goal-items
 	display: flex
-	li
-		width: 60px
-		height: 60px
-		margin-right: 15px
-		cursor: pointer
-		background-color: rgba(#000, .5)
-		border-radius: 50%
-		text-align: center
-		&:last-cgild
-			margin-right: 0
-		p:first-of-type
-			padding-top: 13px
-			font-size: 16px
-			line-height: 16px
-			color: #fff
-		p:last-of-type
-			font-size: 12px
-			line-height: 16px
-			color: #fff
-
+	flex-wrap: wrap	
 		
 
 .goal-item
@@ -76,6 +86,7 @@ a:focus
 	background-color: rgba(#000, .5)
 	border-radius: 50%
 	margin-right: 15px
+	margin-bottom: 15px
 	&:last-cgild
 		margin-right: 0
 	&.active
@@ -103,14 +114,30 @@ a:focus
 			
 		
 
+.go-go,
+.cancel
+	margin-top: 15px
+	display: none
+	&.active
+		display: block
+	
+	
 
 .meet-block
 	margin-top: 40px
-
+	ul li
+		margin-left: 20px
+	.meet-block--title 
+		margin-bottom: 15px
 .js-yourname
 	font-weight: 700
 
-
+.information-block
+	margin-top: 30px
+	p
+		font-style: italic		
+		text-decoration: underline
+		color: rgba(#000, .5)
 
 
 //Toogle mnu

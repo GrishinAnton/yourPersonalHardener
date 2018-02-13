@@ -2,7 +2,7 @@
 <html lang="ru-RU">
   <head>
     <meta charset="utf-8">
-    <title>Главная страница</title>
+    <title>Твой персональный затвердитель</title>
     <meta http-equiv="X-UA-Compatible" content="IE = edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="keywords" content="">
@@ -28,28 +28,31 @@
             <label class="forms-item__label" for="goal">Какова твоя цель?</label>
             <input class="forms-item__input js-input-goal" type="text" id="goal">
           </div>
-          <div class="forms-item">
-            <p>Когда начнем?</p>
-            <button class="js-button-today">Сегодня</button>
-            <button class="js-button-tomorrow">Завтра</button>
-            <button class="js-button-after-tomorrow">Послезавтра</button>
-            <button class="js-button-in-monday">В понедельник</button>
-          </div>
+        </div>
+        <div class="forms-button">
+          <p>Когда начнем?</p>
+          <button class="js-button-today">Сегодня</button>
+          <button class="js-button-tomorrow">Завтра</button>
+          <button class="js-button-after-tomorrow">Послезавтра</button>
+          <button class="js-button-in-monday">В понедельник</button>
+          <button class="js-go-go go-go">Поехали</button>
+          <button class="js-cancel cancel">Отбой</button>
         </div>
         <div class="goal-block">
           <h2 class="goal-block--h2">Моя цель: <span class="js-text-goal"></span></h2>
           <div class="goal-items"></div>
         </div>
         <div class="meet-block">
-          <p>Привет <span class="js-yourname"></span>! Я твой персональный затвердитель. У нас простые правила:</p>
+          <p class="meet-block--title">Привет <span class="js-yourname"></span>! Я твой персональный затвердитель.</p>
+          <p><strong>У нас простые правила:</strong></p>
           <ul>
             <li>1. Поставь цель</li>
             <li>2. Выбери дату когда хочешь начать</li>
             <li>3. Отмечай каждый день, когда достиг своей цели</li>
             <li>4. Продержаться 21 день!</li>
+            <li>5. Даты будут открываться в текущий день</li>
           </ul>
           <p>Это все!</p>
-          <p>Если ты не отметишься один день, то мы прощаемся с тобой и стираем тебя с глаз долой.</p>
         </div>
         <div class="information-block">
           <p>В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. </p>

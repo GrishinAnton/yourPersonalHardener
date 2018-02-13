@@ -1,7 +1,7 @@
 extends layout/_main
 
 block variables
-	- var title = 'Главная страница'
+	- var title = 'Твой персональный затвердитель'
 
 block content
 	.wrapper
@@ -15,27 +15,28 @@ block content
 				.forms-item
 					label(for="goal").forms-item__label Какова твоя цель?
 					input(type="text" id="goal" class="forms-item__input js-input-goal")
-				.forms-item
-					p Когда начнем?
-					button.js-button-today Сегодня
-					button.js-button-tomorrow Завтра
-					button.js-button-after-tomorrow Послезавтра
-					button.js-button-in-monday В понедельник
+			.forms-button
+				p Когда начнем?
+				button.js-button-today Сегодня
+				button.js-button-tomorrow Завтра
+				button.js-button-after-tomorrow Послезавтра
+				button.js-button-in-monday В понедельник
+				button.js-go-go.go-go Поехали
+				button.js-cancel.cancel Отбой
 			.goal-block
 				h2.goal-block--h2 Моя цель: <span class="js-text-goal"></span>
 				.goal-items
-					//- .goal-item
-					//- 	label 10 <span>февраля</span>
-					//- 		input(type="checkbox")
 			.meet-block
-				p Привет <span class="js-yourname"></span>! Я твой персональный затвердитель. У нас простые правила:
+				p.meet-block--title Привет <span class="js-yourname"></span>! Я твой персональный затвердитель.
+				p <strong>У нас простые правила:</strong>
 				ul
 					li 1. Поставь цель
 					li 2. Выбери дату когда хочешь начать
 					li 3. Отмечай каждый день, когда достиг своей цели
 					li 4. Продержаться 21 день!
+					li 5. Даты будут открываться в текущий день
 				p Это все!
-				p Если ты не отметишься один день, то мы прощаемся с тобой и стираем тебя с глаз долой.
+				
 			.information-block
 				p В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. 
 

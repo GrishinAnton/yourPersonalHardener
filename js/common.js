@@ -91,72 +91,59 @@ var inputGoal = $('.js-input-goal')
 var textName = $('.js-yourname')
 var textGoal = $('.js-text-goal')
 var goalItems = $('.goal-items')
+var goalItem = $('.goal-item')
 
 //days
 var todayDay = $('.js-button-today')
 var tomorrowDay = $('.js-button-tomorrow')
 var afterTomorrowDay = $('.js-button-after-tomorrow')
 var inMondayDay = $('.js-button-in-monday')
+var gogoButton = $('.js-go-go')
+var cancelButton = $('.js-cancel')
 
-
-if(localStorage.getItem('name')){
-	inputName.val(localStorage.getItem('name'))
-	$(textName).text(localStorage.getItem('name'))
+//локалсторедж
+var localSName = localStorage.getItem('name')
+var localSGoal = localStorage.getItem('goal')
+//проверка существующих данных. При загружке страницы
+if(localSName){
+	inputName.val(localSName)
+	$(textName).text(localSName)
 }
+if(localSGoal){
+	inputGoal.val(localSGoal)
+	$(textGoal).text(localSGoal)
+}
+
 inputName.on('input', function(){
 	$(textName).text($(this).val())
 	localStorage.setItem('name', $(this).val())
 })
-
-
-if(localStorage.getItem('goal')){
-	inputGoal.val(localStorage.getItem('goal'))
-	$(textGoal).text(localStorage.getItem('goal'))
-}
 inputGoal.on('input', function(){
 	$(textGoal).text($(this).val())
 	localStorage.setItem('goal', $(this).val())
 })
 
-todayDay.on('click', function(){
-	goalItems.html('')
-	var date = Date.now()
-	var hour = 24; 
-	for(var i = 0; i < 21; i++){
-		var number = date + (1000 * 60 * 60 * hour)
-		var currentDate = new Date(number)
-		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
-		hour+=24
-	}
+
+//События на кнопки
+todayDay.on('click', function(){	
+	new Goal(1)
+	gogoButton.addClass('active')
+	cancelButton.addClass('active')
 })
 
-
 tomorrowDay.on('click', function(){
-	goalItems.html('')
-	var date = Date.now()
-	var hour = 48; 
-	for(var i = 0; i < 21; i++){
-		var number = date + (1000 * 60 * 60 * hour)
-		var currentDate = new Date(number)
-		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
-		hour+=24
-	}
+	new Goal(24)
+	gogoButton.addClass('active')
+	cancelButton.addClass('active')
 })
 
 afterTomorrowDay.on('click', function(){
-	goalItems.html('')
-	var date = Date.now()
-	var hour = 72; 
-	for(var i = 0; i < 21; i++){
-		var number = date + (1000 * 60 * 60 * hour)
-		var currentDate = new Date(number)
-		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
-		hour+=24
-	}
+	new Goal(48)
+	gogoButton.addClass('active')
+	cancelButton.addClass('active')
 })
 
 inMondayDay.on('click', function(){
-	goalItems.html('')
 	var date = new Date
 	var daynow = date.getDay()
 	var hour = 0; 
@@ -165,41 +152,79 @@ inMondayDay.on('click', function(){
 		case 1: 
 			hour = 168
 			break
+		case 2: 
+			hour = 144
+			break
+		case 3: 
+			hour = 120
+			break
 	}
 
-	for(var i = 0; i < 21; i++){
-		var number = Date.parse(date) + (1000 * 60 * 60 * hour)
-		var currentDate = new Date(number)
-		teamplateDate(currentDate.getDate(), getMonth(currentDate.getMonth()))
-		hour+=24
-	}
+	new Goal(hour)
+	gogoButton.addClass('active')
+	cancelButton.addClass('active')
+})
+
+
+//поехали
+gogoButton.on('click', function(){
+	todayDay.hide()
+	tomorrowDay.hide()
+	afterTomorrowDay.hide()
+	inMondayDay.hide()
+	gogoButton.removeClass('active')
+	//запускаем
+	goal.start()
+	goal.saveProgress()
+	goal.checkInputDay()
+})
+
+//отмена
+cancelButton.on('click', function(){
+	goalItems.html('')
+	gogoButton.removeClass('active')
+	cancelButton.removeClass('active')
+	todayDay.show()
+	tomorrowDay.show()
+	afterTomorrowDay.show()
+	inMondayDay.show()
+	$(inputName).val('')
+	$(inputGoal).val('')	
+	localStorage.clear()
 })
 
 //обработчик на родителя с дилигированием
 goalItems.on('click', function(e){
-	$(e.target).closest('.goal-item').find('input').prop('disabled', false)
-
 	if($(e.target).closest('.goal-item').find('input').prop('checked')){
 		$(e.target).closest('.goal-item').addClass('active')
+		goal.saveProgress()
 	}else{
 		$(e.target).closest('.goal-item').removeClass('active')
 	}
 })
 
 
-//шаблон вывода дат
-function teamplateDate(date, month){
-	var teamplate = `
-		<div class="goal-item">
-			<label>${date} <span>${month}</span>
-				<input type="checkbox" disabled>
-			</label>
-		</div>`
-	goalItems.append(teamplate)
+function Goal(hourInDay){
+	goalItems.html('')
+	this.date = Date.now()
+
+	if(hourInDay){
+		for(var i = 0; i < 21; i++){
+			var number = this.date + (1000 * 60 * 60 * hourInDay)
+			var currentDate = new Date(number)
+			this.teamplateDate(currentDate.getDate(), this.getMonth(currentDate.getMonth()))
+			hourInDay+=24
+		}
+	}
 }
 
-//определение месяца по номерц
-function getMonth(numberMonth){
+
+//определяем каждый раз новое время при открывании страницы
+Goal.TIME = Date.now()
+
+
+//определение месяца
+Goal.prototype.getMonth = function(numberMonth){
 	switch(numberMonth){
 		case 0:
 			return 'Января'
@@ -209,5 +234,63 @@ function getMonth(numberMonth){
 			return 'Марта'
 	}
 }
+//шаблон вывода дат
+Goal.prototype.teamplateDate = function(date, month){
+	var teamplate = `
+		<div class="goal-item" data-date="${date}">
+			<label>${date} <span>${month}</span>
+				<input type="checkbox" disabled>
+			</label>
+		</div>`
+	goalItems.append(teamplate)
+}
 
-//localStorge
+
+Goal.prototype.start = function(){
+	var localSTime = localStorage.getItem('startTime')
+
+	//проверка существующих данных
+	if(!localSTime){
+		localStorage.setItem('startTime', this.date)
+	}	
+
+}
+
+Goal.prototype.saveProgress = function(){
+	localStorage.setItem('haveProgress', 'true')
+	window.onunload = function() {
+		var cloneGoals = $('.goal-items').html()
+	  localStorage.setItem('progress', cloneGoals)
+	};
+}
+
+Goal.prototype.checkProgress = function(){
+	var localSHaveProgerss = localStorage.getItem('haveProgress')	
+	if(localSHaveProgerss){
+		this.progress()
+	}
+}
+
+Goal.prototype.progress = function(){
+	goalItems.html(localStorage.getItem('progress'))
+	todayDay.hide()
+	tomorrowDay.hide()
+	afterTomorrowDay.hide()
+	inMondayDay.hide()
+	cancelButton.addClass('active')
+
+}
+
+Goal.prototype.checkInputDay = function(){
+	var localSHaveProgerss = localStorage.getItem('haveProgress')	
+	if(localSHaveProgerss){
+		var currentDate = new Date(Goal.TIME)
+		var currentDateNumber = currentDate.getDate()
+		$('.goal-item[data-date=' + currentDateNumber + ']').find('input').prop('disabled', false)
+	}
+	
+}
+
+var goal = new Goal()
+goal.checkProgress()
+goal.checkInputDay()
