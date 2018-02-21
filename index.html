@@ -18,44 +18,44 @@
       <div class="header">
         <h1 class="header--h1">Твой персональный затвердитель</h1>
       </div>
-      <main class="start-block">
-        <div class="forms">
-          <div class="forms-item">
-            <label class="forms-item__label" for="name">Хочешь представиться?</label>
-            <input class="forms-item__input js-name" type="text" id="name">
-          </div>
-          <div class="forms-item">
-            <label class="forms-item__label" for="goal">Какова твоя цель?</label>
-            <input class="forms-item__input js-input-goal" type="text" id="goal">
-          </div>
-        </div>
-        <div class="forms-button">
-          <p>Когда начнем?</p>
-          <button class="js-button-today">Сегодня</button>
-          <button class="js-button-tomorrow">Завтра</button>
-          <button class="js-button-after-tomorrow">Послезавтра</button>
-          <button class="js-button-in-monday">В понедельник</button>
-          <button class="js-go-go go-go">Поехали</button>
-          <button class="js-cancel cancel">Отбой</button>
-        </div>
-        <div class="goal-block">
-          <h2 class="goal-block--h2">Моя цель: <span class="js-text-goal"></span></h2>
-          <div class="goal-items"></div>
-        </div>
+      <main>
         <div class="meet-block">
-          <p class="meet-block--title">Привет <span class="js-yourname"></span>! Я твой персональный затвердитель.</p>
+          <p class="meet-block--title">Привет! Я твой персональный затвердитель.</p>
+          <p class="meet-block--description">Есть мнение, что привычка у человека формируется в течении 21 дня. Данный проект позволяет вам вести отметки о достижении данной цели, в виде ежедневного отмечания вашей привычки. </p>
           <p><strong>У нас простые правила:</strong></p>
           <ul>
             <li>1. Поставь цель</li>
             <li>2. Выбери дату когда хочешь начать</li>
             <li>3. Отмечай каждый день, когда достиг своей цели</li>
-            <li>4. Продержаться 21 день!</li>
+            <li>4. Продержись 21 день!</li>
             <li>5. Даты будут открываться в текущий день</li>
           </ul>
-          <p>Это все!</p>
         </div>
-        <div class="information-block">
-          <p>В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. </p>
+        <div class="meet-block__button"><a href="#">Скрыть</a></div>
+        <div class="start-block">
+          <div class="forms">
+            <div class="forms-item">
+              <label class="forms-item__label" for="goal">Какова твоя цель?</label>
+              <input class="forms-item__input js-input-goal" type="text" id="goal">
+            </div>
+          </div>
+          <div class="forms-button">
+            <p>Когда начнем?</p>
+            <button class="js-button-today">Сегодня</button>
+            <button class="js-button-tomorrow">Завтра</button>
+            <button class="js-button-after-tomorrow">Послезавтра</button>
+            <button class="js-button-in-monday">В понедельник</button>
+            <button class="js-go-go go-go">Поехали</button>
+            <button class="js-cancel cancel">Отбой</button>
+          </div>
+          <div class="goal-block">
+            <h2 class="goal-block--h2">Моя цель: <span class="js-text-goal"></span></h2>
+            <h3 class="goal-block--h3">Поздравляем, ты сделал это! </h3>
+            <div class="goal-items"></div>
+          </div>
+          <div class="information-block">
+            <p>В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. </p>
+          </div>
         </div>
       </main>
     </div>

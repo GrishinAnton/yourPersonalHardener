@@ -7,38 +7,42 @@ block content
 	.wrapper
 		.header
 			h1.header--h1 Твой персональный затвердитель
-		main.start-block
-			.forms
-				.forms-item
-					label(for="name").forms-item__label Хочешь представиться?
-					input(type="text" id="name" class="forms-item__input js-name")
-				.forms-item
-					label(for="goal").forms-item__label Какова твоя цель?
-					input(type="text" id="goal" class="forms-item__input js-input-goal")
-			.forms-button
-				p Когда начнем?
-				button.js-button-today Сегодня
-				button.js-button-tomorrow Завтра
-				button.js-button-after-tomorrow Послезавтра
-				button.js-button-in-monday В понедельник
-				button.js-go-go.go-go Поехали
-				button.js-cancel.cancel Отбой
-			.goal-block
-				h2.goal-block--h2 Моя цель: <span class="js-text-goal"></span>
-				.goal-items
+		main
 			.meet-block
-				p.meet-block--title Привет <span class="js-yourname"></span>! Я твой персональный затвердитель.
+				p.meet-block--title Привет! Я твой персональный затвердитель.
+				p.meet-block--description Есть мнение, что привычка у человека формируется в течении 21 дня. Данный проект позволяет вам вести отметки о достижении данной цели, в виде ежедневного отмечания вашей привычки. 
 				p <strong>У нас простые правила:</strong>
 				ul
 					li 1. Поставь цель
 					li 2. Выбери дату когда хочешь начать
 					li 3. Отмечай каждый день, когда достиг своей цели
-					li 4. Продержаться 21 день!
+					li 4. Продержись 21 день!
 					li 5. Даты будут открываться в текущий день
-				p Это все!
-				
-			.information-block
-				p В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. 
+			.meet-block__button
+				a(href="#") Скрыть
+			.start-block
+				.forms
+					//- .forms-item
+					//- 	label(for="name").forms-item__label Хочешь представиться?
+					//- 	input(type="text" id="name" class="forms-item__input js-name")
+					.forms-item
+						label(for="goal").forms-item__label Какова твоя цель?
+						input(type="text" id="goal" class="forms-item__input js-input-goal")
+				.forms-button
+					p Когда начнем?
+					button.js-button-today Сегодня
+					button.js-button-tomorrow Завтра
+					button.js-button-after-tomorrow Послезавтра
+					button.js-button-in-monday В понедельник
+					button.js-go-go.go-go Поехали
+					button.js-cancel.cancel Отбой
+				.goal-block
+					h2.goal-block--h2 Моя цель: <span class="js-text-goal"></span>
+					h3.goal-block--h3 Поздравляем, ты сделал это! 
+					.goal-items
+					
+				.information-block
+					p В качестве хранения данных используется local storage браузера. Информация никуда не передается и больше нигде не сохраняется. 
 
 
 

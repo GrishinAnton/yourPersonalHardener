@@ -41,6 +41,26 @@ a:focus
 	margin-bottom: 30px
 
 
+.meet-block
+	margin-bottom: 15px
+	ul li
+		margin-left: 20px
+	.meet-block--title,
+	.meet-block--description
+		margin-bottom: 15px
+
+.meet-block__button
+	margin-bottom: 40px
+	a
+		+roboto
+		color: #000
+		text-decoration: none
+		border-bottom: 1px dashed #000
+		transition: all .2s
+		&:hover
+			color: lighten(#000, 30%)
+			border-color: lighten(#000, 30%)
+
 .forms
 
 
@@ -110,6 +130,7 @@ a:focus
 			width: 0
 			height: 0
 			position: absolute
+			opacity: 0
 		input
 			
 		
@@ -121,14 +142,16 @@ a:focus
 	&.active
 		display: block
 	
-	
 
-.meet-block
-	margin-top: 40px
-	ul li
-		margin-left: 20px
-	.meet-block--title 
-		margin-bottom: 15px
+.goal-block
+	.goal-block--h3
+		margin-top: 0	
+		display: none
+		&.active
+			display: block
+			
+
+
 .js-yourname
 	font-weight: 700
 
@@ -138,6 +161,7 @@ a:focus
 		font-style: italic		
 		text-decoration: underline
 		color: rgba(#000, .5)
+		font-size: 12px
 
 
 //Toogle mnu

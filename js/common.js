@@ -1,178 +1,96 @@
-// Toogle mnu
-(function(){
-	$(function(){
-		$(".toggle-mnu").click(function() {
-			$(this).addClass("on");
-			$(".fixed-mnu").hide();
-		});
-	});
-})();
-
-
-//============
-//Magnific popup
-(function(){
-	$(document).ready(function($) {
-		$('.popup-search').magnificPopup({
-		    type: 'inline'
-		});
-	});
-})();
-
-//=================
-
-
-
-
-//Fixed mnu
-
-// $(window).scroll(function(){
-// 	var scrollTop = $(window).scrollTop(),
-// 	stickyBlock = $(".breadcrambs"),
-// 	position = stickyBlock.offset().top;
-	
-// 		$(window).on('resize', function() {
-// 			position = stickyBlock.offset().top;
-// 		});
-
-// 	if(scrollTop >= position){
-// 		$(".wrapper--main_mnu").css('top', '0').addClass('fixed-mnu');
-// 	}
-// 	if(scrollTop <= position){
-// 		$(".wrapper--main_mnu").css('top', '').removeClass('fixed-mnu'); 
-// 	}
-// });
-
-
-
-//Scroll
-$(function(){
-
-	//scrollToTop
-	var 
-		scrolllink = $('.scrolltop'),
-		scrollToTop = $('.scrolltop a')
-
-	$(window).scroll(function(){
-		var scroll = $(window).scrollTop();
-
-		if (scroll > 300){
-			scrolllink.show()
-		} if (scroll < 300){
-			scrolllink.hide()
-		}
-
-		$('.scrolltop a').on('click', function(event){
-		event.preventDefault();
-
-		var id  = $(this).attr('href'),
-		top = $(id).offset().top;
-	
-		$('body,html').stop(true).animate({scrollTop: top}, 1000);		
-
-	});	
-
-});
-
-	//Anchor
-	$('.scroll').on('click', function(event){
-		event.preventDefault();
-
-		var id  = $(this).attr('href'),
-		top = $(id).offset().top;
-	
-	$('body,html').stop(true).animate({scrollTop: top}, 1500);
-
-	});	
-});
 //===doIt
-var inputName = $('.js-name')
-var inputGoal = $('.js-input-goal')
-var textName = $('.js-yourname')
-var textGoal = $('.js-text-goal')
-var goalItems = $('.goal-items')
-var goalItem = $('.goal-item')
+var inputNameElem = $('.js-name')
+var inputGoalElem = $('.js-input-goal')
+var textNameElem = $('.js-yourname')
+var textGoalElem = $('.js-text-goal')
+var goalItemsElem = $('.goal-items')
+var whenStartElem = $('.forms-button > p')
+var meetElem = $('.meet-block')
+var meetHideElem = $('.meet-block__button a')
+var congratulationsElem = $('.goal-block--h3')
+
+
 
 //days
-var todayDay = $('.js-button-today')
-var tomorrowDay = $('.js-button-tomorrow')
-var afterTomorrowDay = $('.js-button-after-tomorrow')
-var inMondayDay = $('.js-button-in-monday')
-var gogoButton = $('.js-go-go')
-var cancelButton = $('.js-cancel')
+var buttonToday = $('.js-button-today')
+var buttonTomorrow = $('.js-button-tomorrow')
+var buttonAfterTomorrow = $('.js-button-after-tomorrow')
+var buttonInMonday = $('.js-button-in-monday')
+var buttonGo = $('.js-go-go')
+var buttonCancel = $('.js-cancel')
 
 //локалсторедж
 var localSName = localStorage.getItem('name')
 var localSGoal = localStorage.getItem('goal')
+
+
 //проверка существующих данных. При загружке страницы
 if(localSName){
-	inputName.val(localSName)
-	$(textName).text(localSName)
+	inputNameElem.val(localSName)
+	$(textNameElem).text(localSName)
 }
 if(localSGoal){
-	inputGoal.val(localSGoal)
-	$(textGoal).text(localSGoal)
+	inputGoalElem.val(localSGoal)
+	$(textGoalElem).text(localSGoal)
 }
 
-inputName.on('input', function(){
-	$(textName).text($(this).val())
+inputNameElem.on('input', function(){
+	$(textNameElem).text($(this).val())
 	localStorage.setItem('name', $(this).val())
 })
-inputGoal.on('input', function(){
-	$(textGoal).text($(this).val())
+inputGoalElem.on('input', function(){
+	$(textGoalElem).text($(this).val())
 	localStorage.setItem('goal', $(this).val())
 })
 
 
 //События на кнопки
-todayDay.on('click', function(){	
-	new Goal(1)
-	gogoButton.addClass('active')
-	cancelButton.addClass('active')
-})
 
-tomorrowDay.on('click', function(){
-	new Goal(24)
-	gogoButton.addClass('active')
-	cancelButton.addClass('active')
-})
+function onButtonClick(hour){
+	return function(e){
+		e.preventDefault()
+		new Goal(hour)
+		buttonGo.addClass('active')
+		buttonCancel.addClass('active')
+	}
+}
 
-afterTomorrowDay.on('click', function(){
-	new Goal(48)
-	gogoButton.addClass('active')
-	cancelButton.addClass('active')
-})
+var hoursToMonday = {
+	'1': 168,
+	'2': 144,
+	'3': 120,
+	'4': 96,
+	'5': 72,
+	'6': 48,
+	'0': 24,
+}
 
-inMondayDay.on('click', function(){
+buttonToday.on('click', onButtonClick(1))
+buttonTomorrow.on('click', onButtonClick(24))
+buttonAfterTomorrow.on('click', onButtonClick(48))
+
+buttonInMonday.on('click', function(e){
+	e.preventDefault()
 	var date = new Date
 	var daynow = date.getDay()
-	var hour = 0; 
-	
-	switch(daynow){
-		case 1: 
-			hour = 168
-			break
-		case 2: 
-			hour = 144
-			break
-		case 3: 
-			hour = 120
-			break
-	}
+	var hour = hoursToMonday[daynow]; 
 
 	new Goal(hour)
-	gogoButton.addClass('active')
-	cancelButton.addClass('active')
+	buttonGo.addClass('active')
+	buttonCancel.addClass('active')
 })
+
 
 
 //поехали
-gogoButton.on('click', function(){
-	todayDay.hide()
-	tomorrowDay.hide()
-	afterTomorrowDay.hide()
-	inMondayDay.hide()
-	gogoButton.removeClass('active')
+buttonGo.on('click', function(e){
+	e.preventDefault()
+	buttonToday.hide()
+	buttonTomorrow.hide()
+	buttonAfterTomorrow.hide()
+	buttonInMonday.hide()
+	buttonGo.removeClass('active')
+	whenStartElem.hide()
 	//запускаем
 	goal.start()
 	goal.saveProgress()
@@ -180,24 +98,48 @@ gogoButton.on('click', function(){
 })
 
 //отмена
-cancelButton.on('click', function(){
-	goalItems.html('')
-	gogoButton.removeClass('active')
-	cancelButton.removeClass('active')
-	todayDay.show()
-	tomorrowDay.show()
-	afterTomorrowDay.show()
-	inMondayDay.show()
-	$(inputName).val('')
-	$(inputGoal).val('')	
+buttonCancel.on('click', function(e){
+	e.preventDefault()
+	goalItemsElem.html('')
+	buttonGo.removeClass('active')
+	buttonCancel.removeClass('active')
+	buttonToday.show()
+	buttonTomorrow.show()
+	buttonAfterTomorrow.show()
+	buttonInMonday.show()
+	textGoalElem.text('')
+	congratulationsElem.removeClass('active')
+	$(inputNameElem).val('')
+	$(inputGoalElem).val('')	
 	localStorage.clear()
 })
 
+
+
+meetHideElem.on('click', function(e){
+	e.preventDefault()
+	meetElem.toggle()
+	if($(this).text() == 'Скрыть'){
+		$(this).text('Показать')
+		localStorage.setItem('meet', 'hide')
+	}else{
+		$(this).text('Скрыть')
+		localStorage.removeItem('meet')
+	}	
+})
+
+
+
+
+
+
+
 //обработчик на родителя с дилигированием
-goalItems.on('click', function(e){
-	if($(e.target).closest('.goal-item').find('input').prop('checked')){
+goalItemsElem.on('change', function(e){
+	if($(e.target).prop('checked')){
 		$(e.target).closest('.goal-item').addClass('active')
 		goal.saveProgress()
+		goal.checkDoit()
 	}else{
 		$(e.target).closest('.goal-item').removeClass('active')
 	}
@@ -205,7 +147,7 @@ goalItems.on('click', function(e){
 
 
 function Goal(hourInDay){
-	goalItems.html('')
+	goalItemsElem.html('')
 	this.date = Date.now()
 
 	if(hourInDay){
@@ -224,6 +166,7 @@ Goal.TIME = Date.now()
 
 
 //определение месяца
+//Посмотреть (https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString)
 Goal.prototype.getMonth = function(numberMonth){
 	switch(numberMonth){
 		case 0:
@@ -232,6 +175,26 @@ Goal.prototype.getMonth = function(numberMonth){
 			return 'Февраля'
 		case 2:
 			return 'Марта'
+		case 3:
+			return 'Апреля'
+		case 4:
+			return 'Мая'
+		case 5:
+			return 'Июня'
+		case 6:
+			return 'Июля'
+		case 7:
+			return 'Августа'
+		case 8:
+			return 'Сентября'
+		case 9:
+			return 'Октября'
+		case 10:
+			return 'Ноября'
+		case 11:
+			return 'Декабря'
+		case 0:
+			return 'Января'
 	}
 }
 //шаблон вывода дат
@@ -242,7 +205,7 @@ Goal.prototype.teamplateDate = function(date, month){
 				<input type="checkbox" disabled>
 			</label>
 		</div>`
-	goalItems.append(teamplate)
+	goalItemsElem.append(teamplate)
 }
 
 
@@ -272,12 +235,13 @@ Goal.prototype.checkProgress = function(){
 }
 
 Goal.prototype.progress = function(){
-	goalItems.html(localStorage.getItem('progress'))
-	todayDay.hide()
-	tomorrowDay.hide()
-	afterTomorrowDay.hide()
-	inMondayDay.hide()
-	cancelButton.addClass('active')
+	goalItemsElem.html(localStorage.getItem('progress'))
+	buttonToday.hide()
+	buttonTomorrow.hide()
+	buttonAfterTomorrow.hide()
+	buttonInMonday.hide()
+	whenStartElem.hide()
+	buttonCancel.addClass('active')
 
 }
 
@@ -291,6 +255,23 @@ Goal.prototype.checkInputDay = function(){
 	
 }
 
+Goal.prototype.checkMeet = function(){
+	var localSHaveProgerss = localStorage.getItem('meet')	
+	if(localSHaveProgerss){
+			meetElem.hide()
+			meetHideElem.html('Показать')
+	}	
+}
+
+Goal.prototype.checkDoit = function(){
+	var activeItemLength = $('.goal-item.active').length
+	if(activeItemLength == 21){
+		congratulationsElem.addClass('active')
+	}
+}
+
 var goal = new Goal()
 goal.checkProgress()
 goal.checkInputDay()
+goal.checkMeet()
+goal.checkDoit()
